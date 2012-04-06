@@ -12,11 +12,12 @@ import org.bukkit.entity.Player;
  */
 public class ChatSettings
 {
-    private ChatWindow currentWindow = ChatWindow.None;
+    private ChatWindow currentWindow;
     private Player player;
     
     public ChatSettings(Player player)
     {
+        currentWindow = ChatWindow.None;
         this.player = player;
     }
     
@@ -39,8 +40,8 @@ public class ChatSettings
         return currentWindow;
     }
     
-    public void setChatWindow()
+    public void setChatWindow(ChatWindow chatWindow)
     {
-        currentWindow = ChatWindow.None;
+        currentWindow = chatWindow;
     }
 }

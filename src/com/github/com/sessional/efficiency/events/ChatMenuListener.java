@@ -25,6 +25,14 @@ public class ChatMenuListener implements Listener
     @EventHandler
     public void onChatEnter(PlayerChatEvent event)
     {
-        
+        if (plugin.getPlayerSettings(event.getPlayer()).getChatSettings().isPlayerInWindow())
+        {
+            event.getPlayer().sendMessage("Player is in a window.");
+        }
+        else
+        {
+            
+            event.getPlayer().sendMessage("Player is NOT in a window.");
+        }
     }
 }
