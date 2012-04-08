@@ -16,6 +16,23 @@ public class Option
     
     public Option(int hotkey, String text, ChatWindow linkedWindow)
     {
-        
+        this.hotkey = hotkey;
+        this.text = text;
+        this.linkedWindow = linkedWindow;
+    }
+    
+    public String getName()
+    {
+        return text;
+    }
+    
+    public int getHotkey()
+    {
+        return hotkey;
+    }
+    
+    public ChatWindow getLinkedWindow()
+    {
+        return linkedWindow;
     }
 }

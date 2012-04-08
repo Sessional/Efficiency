@@ -19,19 +19,20 @@ public class MainMenu extends ChatWindow
      * Learned Techniques
      * Exit (0)
      */
-    private int SEE_EXPERTISE = 1, LEVEL_UP = 2, LEARNED_TECHNIQUES = 3;
+    private int SEE_EXPERTISE = 1, BROWSE_TECHNIQUES = 2, LEVEL_UP = 3, LEARNED_TECHNIQUES = 4;
     private int EXIT = 0;
     /**
      * Number of options excluding EXIT
      */
-    private int numOptions;
     
     public MainMenu(EfficiencyPlugin plugin)
     {
         super(plugin);
-        this.addOption(SEE_EXPERTISE, new Option(1, "See Expertise", new ExpertiseMenu(plugin)));
-        this.addOption(LEVEL_UP, new Option(2, "Level Up", new LevelUpMenu()));
-        this.addOption(EXIT, new Option(0, "Exit", null));
+        this.setNumOptions(3);
+        this.addOption(SEE_EXPERTISE, new Option(SEE_EXPERTISE, "See Expertise", new ExpertiseMenu(plugin)));
+        this.addOption(BROWSE_TECHNIQUES, new Option(BROWSE_TECHNIQUES, "Browse Techniques", new TechniqueWindow(plugin)));
+        this.addOption(LEVEL_UP, new Option(LEVEL_UP, "Level Up", new LevelUpMenu(plugin)));
+        this.addOption(EXIT, new Option(EXIT, "Exit", null));
     }
 
     @Override

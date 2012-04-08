@@ -4,6 +4,10 @@
  */
 package com.github.com.sessional.efficiency.settings;
 
+import com.github.com.sessional.efficiency.EfficiencyPlugin;
+import com.github.com.sessional.efficiency.chatwindows.ChatWindow;
+import com.github.com.sessional.efficiency.chatwindows.Option;
+import java.util.List;
 import org.bukkit.entity.Player;
 
 /**
@@ -12,16 +16,18 @@ import org.bukkit.entity.Player;
  */
 public class ChatSettings
 {
-    private ChatWindow currentWindow;
+    private ChatMenu currentMenu;
     private Player player;
+    private EfficiencyPlugin plugin;
     
-    public ChatSettings(Player player)
+    public ChatSettings(EfficiencyPlugin plugin, Player player)
     {
-        currentWindow = ChatWindow.None;
+        this.plugin = plugin; 
+        currentMenu = ChatMenu.None;
         this.player = player;
     }
     
-    public enum ChatWindow
+    public enum ChatMenu
     {
         None,
         Root,
@@ -32,16 +38,38 @@ public class ChatSettings
     
     public boolean isPlayerInWindow()
     {
-        return currentWindow != ChatWindow.None;
+        return currentMenu != ChatMenu.None;
     }
     
-    public ChatWindow getChatWindow()
+    public ChatMenu getChatMenu()
     {
-        return currentWindow;
+        return currentMenu;
     }
     
-    public void setChatWindow(ChatWindow chatWindow)
+    public void setChatMenu(ChatMenu chatMenu)
     {
-        currentWindow = chatWindow;
+        currentMenu = chatMenu;
+        showChatMenu();
+    }
+    
+    public void showChatMenu()
+    {
+        ChatWindow chatWin = plugin.getChatWindow(getNameFromType(currentMenu));
+        for (int i = 1; i <= chatWin.getNumOptions(); i++)
+        {
+            player.sendMessage(chatWin.getOption(i).getHotkey() + ". " + chatWin.getOption(i).getName());
+        }
+        player.sendMessage(chatWin.getOption(0).getHotkey() + ". " + chatWin.getOption(0).getName());
+    }
+    
+    public String getNameFromType(ChatMenu menuType)
+    {
+        switch (menuType)
+        {
+            case Root:
+                return "MainMenu";
+            default:
+                return "None";
+        }
     }
 }

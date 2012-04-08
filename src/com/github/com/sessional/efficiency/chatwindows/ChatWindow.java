@@ -5,9 +5,11 @@
 package com.github.com.sessional.efficiency.chatwindows;
 
 import com.github.com.sessional.efficiency.EfficiencyPlugin;
+import com.github.com.sessional.efficiency.settings.ChatSettings.ChatMenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -18,10 +20,22 @@ public abstract class ChatWindow
 
     private HashMap<Integer, Option> options;
     private EfficiencyPlugin plugin;
+    private int numOptions = 0;
 
     public ChatWindow(EfficiencyPlugin plugin)
     {
+        options = new HashMap<Integer, Option>();
         this.plugin = plugin;
+    }
+    
+    public int getNumOptions()
+    {
+        return numOptions;
+    }
+    
+    public void setNumOptions(int options)
+    {
+        numOptions = options;
     }
     
     public List<Option> getOptions()
@@ -32,6 +46,11 @@ public abstract class ChatWindow
             retList.add(o);
         }
         return retList;
+    }
+    
+    public void exitWindow(Player player)
+    {
+        plugin.getPlayerSettings(player).getChatSettings().setChatMenu(ChatMenu.None);
     }
 
     public void addOption(Integer optionNumber, Option option)

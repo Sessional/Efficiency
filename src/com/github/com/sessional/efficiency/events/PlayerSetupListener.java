@@ -27,6 +27,6 @@ public class PlayerSetupListener implements Listener
     @EventHandler
     public void onPlayerLogin(PlayerJoinEvent event)
     {
-        
+        plugin.createPlayerSettings(event.getPlayer());
     }
 }

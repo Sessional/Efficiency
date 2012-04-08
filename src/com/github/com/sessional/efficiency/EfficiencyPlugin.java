@@ -4,8 +4,11 @@
  */
 package com.github.com.sessional.efficiency;
 
+import com.github.com.sessional.efficiency.chatwindows.ChatWindow;
+import com.github.com.sessional.efficiency.chatwindows.MainMenu;
 import com.github.com.sessional.efficiency.events.ChatMenuListener;
-import com.github.com.sessional.efficiency.settings.ChatSettings.ChatWindow;
+import com.github.com.sessional.efficiency.events.PlayerSetupListener;
+import com.github.com.sessional.efficiency.settings.ChatSettings.ChatMenu;
 import com.github.com.sessional.efficiency.settings.PlayerSettings;
 import java.util.HashMap;
 import org.bukkit.command.Command;
@@ -20,10 +23,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class EfficiencyPlugin extends JavaPlugin
 {
     private HashMap<String, PlayerSettings> playerSettings;
+    private HashMap<String, ChatWindow> chatWindows;
+    
+    public ChatWindow getChatWindow(String name)
+    {
+        return chatWindows.get(name);
+    }
     
     @Override
     public void onEnable()
     {
+        playerSettings = new HashMap<String, PlayerSettings>();
+        chatWindows = new HashMap<String, ChatWindow>();
+        chatWindows.put("MainMenu", new MainMenu(this));
+        getServer().getPluginManager().registerEvents(new PlayerSetupListener(this), this);
         this.getServer().getPluginManager().registerEvents(new ChatMenuListener(this), this);
     }
     
@@ -53,11 +66,16 @@ public class EfficiencyPlugin extends JavaPlugin
         if (player == null)
             return false;
         
-        if (cmd.getName().equals("Efficiency"))
+        if (cmd.getName().equals("eff"))
         {
-            getPlayerSettings(player).getChatSettings().setChatWindow(ChatWindow.Root);
+            getPlayerSettings(player).getChatSettings().setChatMenu(ChatMenu.Root);
         }
         
         return false;
+    }
+
+    public void createPlayerSettings(Player player)
+    {
+        playerSettings.put(player.getName(), new PlayerSettings(this, player));
     }
 }

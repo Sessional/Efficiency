@@ -27,7 +27,14 @@ public class ChatMenuListener implements Listener
     {
         if (plugin.getPlayerSettings(event.getPlayer()).getChatSettings().isPlayerInWindow())
         {
-            event.getPlayer().sendMessage("Player is in a window.");
+            switch (plugin.getPlayerSettings(event.getPlayer()).getChatSettings().getChatMenu())
+            {
+                case Root:
+                    break;
+                default:
+                    
+                    break;
+            }
         }
         else
         {
