@@ -1,6 +1,6 @@
 name: Efficiency
 version: 0.1
-main: com.github.com.sessional.efficiency.EfficiencyPlugin
+main: com.github.sessional.efficiency.EfficiencyPlugin
 commands:
   efficiency:
     description:

@@ -111,6 +111,7 @@ public abstract class ChatMenu
         {
             itemsToList--;
         }
+        player.sendMessage("Menu: " + getName() + " - Page: " + chatSettings.getPageNum());
         for (int i = (chatSettings.getPageNum()*itemsToList) + 1; i <= (chatSettings.getPageNum()+1)*itemsToList; i++)
         {
             if (getOption(i) != null)

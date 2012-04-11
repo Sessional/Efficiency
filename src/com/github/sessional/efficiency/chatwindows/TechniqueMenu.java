@@ -16,6 +16,7 @@ public class TechniqueMenu extends ChatMenu
     public TechniqueMenu(EfficiencyPlugin plugin, ChatMenu parent)
     {
         super(plugin, parent);
+        setName("Technique Menu");
     }
     
     public void init()

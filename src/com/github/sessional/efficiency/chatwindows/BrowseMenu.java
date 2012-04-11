@@ -16,6 +16,7 @@ public class BrowseMenu extends ChatMenu
     public BrowseMenu(EfficiencyPlugin plugin, ChatMenu parent)
     {
         super(plugin, parent);
+        setName("Browse Menu");
     }
     
     public void init()
