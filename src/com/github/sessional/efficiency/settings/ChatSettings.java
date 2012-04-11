@@ -56,9 +56,12 @@ public class ChatSettings
     public void setChatMenu(ChatMenu chatMenu)
     {
         currentMenu = chatMenu;
+        if (currentMenu == null)
+        {
+            player.sendMessage("You have exited the menu. You can now talk again.");
+        }
         if (currentMenu != null)
         {
-            System.out.println("Listing options.");
             currentMenu.displayMenu(player);
         }
     }

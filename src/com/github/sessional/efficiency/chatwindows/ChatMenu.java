@@ -111,22 +111,22 @@ public abstract class ChatMenu
         {
             itemsToList--;
         }
-        player.sendMessage("Menu: " + getName() + " - Page: " + chatSettings.getPageNum());
+        player.sendMessage("§6Menu: " + getName() + " - Page: " + (chatSettings.getPageNum() + 1));
         for (int i = (chatSettings.getPageNum()*itemsToList) + 1; i <= (chatSettings.getPageNum()+1)*itemsToList; i++)
         {
             if (getOption(i) != null)
             {
-                player.sendMessage(getOption(i).getHotkey() + ": " + getOption(i).getName());
+                player.sendMessage("§6" + getOption(i).getHotkey() + ": §f" + getOption(i).getName());
             }
         }
         if (getOption((chatSettings.getPageNum()+1)*itemsPerPage) != null)
         {
-            player.sendMessage(getOption(8).getHotkey() + ": " + getOption(8).getName());
+            player.sendMessage("§6" + getOption(8).getHotkey() + ": §f" + getOption(8).getName());
         }
         if (chatSettings.getPageNum() != 0)
         {
-            player.sendMessage(getOption(9).getHotkey() + ": " + getOption(9).getName());
+            player.sendMessage("§6" + getOption(9).getHotkey() + ": §f" + getOption(9).getName());
         }
-        player.sendMessage(getOption(0).getHotkey() + ": " + getOption(0).getName());
+        player.sendMessage("§6" + getOption(0).getHotkey() + ": §f" + getOption(0).getName());
     }
 }

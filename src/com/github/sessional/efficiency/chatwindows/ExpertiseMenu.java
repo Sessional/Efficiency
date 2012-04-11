@@ -5,7 +5,7 @@
 package com.github.sessional.efficiency.chatwindows;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
-import com.github.sessional.efficiency.chatwindows.options.LinkedMenu;
+import com.github.sessional.efficiency.chatwindows.options.BackLink;
 
 /**
  *
@@ -23,7 +23,7 @@ public class ExpertiseMenu extends ChatMenu
     {
         setNumOptions(0);
         
-        LinkedMenu backLink = new LinkedMenu(getPlugin(), "Back", 0, getPlugin().getChatMenu("MainMenu"));
+        BackLink backLink = new BackLink(getPlugin(), "Back", 0);
         addOption(0, backLink);
     }
 }

@@ -48,11 +48,9 @@ public class ChatMenuListener implements Listener
             Option o = chatSettings.getChatMenu().getOption(Integer.parseInt(event.getMessage()));
             if (o instanceof BackLink)
             {
-                o = (BackLink) o;
                 chatSettings.setChatMenu(chatSettings.getChatMenu().getParent());
             } else if (o instanceof ExitLink)
             {
-                o = (ExitLink) o;
                 chatSettings.setChatMenu(null);
             } else if (o instanceof LinkedMenu)
             {
