@@ -12,20 +12,21 @@ import com.github.sessional.efficiency.chatwindows.options.LinkedMenu;
  *
  * @author Andrew
  */
-public class BrowseMenu extends ChatMenu
+public class DiggingDisplayMenu extends ChatMenu
 {
-    public BrowseMenu(EfficiencyPlugin plugin, ChatMenu parent)
+    
+    public DiggingDisplayMenu(EfficiencyPlugin plugin, ChatMenu parent)
     {
         super(plugin, parent);
-        setName("Browse Menu");
+        setName("Digging Tree Browse Menu");
     }
     
     public void init()
     {
         setNumOptions(1);
-        LinkedMenu diggingMenu = new LinkedMenu(getPlugin(), "Digging Menu", 1, getPlugin().getChatMenu("DiggingDisplayMenu"));
+        LinkedMenu digging1Menu = new LinkedMenu(getPlugin(), "Digging Talent 1", 1, getPlugin().getChatMenu("Digging1TalentMenu"));
         BackLink backLink = new BackLink(getPlugin(), "Back", 0);
-        addOption(1, diggingMenu);
         addOption(0, backLink);
+        addOption(1, digging1Menu);
     }
 }

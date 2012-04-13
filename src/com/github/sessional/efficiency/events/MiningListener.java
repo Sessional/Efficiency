@@ -5,6 +5,7 @@
 package com.github.sessional.efficiency.events;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -26,5 +27,14 @@ public class MiningListener implements Listener
     public void onBlockBreak(BlockBreakEvent event)
     {
         
+    }
+    
+    public boolean isTypePickaxe(Material material)
+    {
+        if (material == Material.WOOD_PICKAXE || material == Material.STONE_PICKAXE
+                || material == Material.IRON_PICKAXE || material == Material.GOLD_PICKAXE
+                || material == Material.DIAMOND_PICKAXE)
+            return true;
+        return false;
     }
 }

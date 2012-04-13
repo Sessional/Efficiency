@@ -103,15 +103,19 @@ public abstract class ChatMenu
     {
         int itemsToList = itemsPerPage;
         ChatSettings chatSettings = getPlugin().getPlayerSettings(player).getChatSettings();
+        System.out.println("Before last page check.");
         if (chatSettings.getPageNum() != 0)
         {
             itemsToList--;
         }
+        System.out.println("Before next page check.");
         if (getOption((chatSettings.getPageNum()+1)*(itemsToList-1)) != null)
         {
             itemsToList--;
         }
+        System.out.println("Before name.");
         player.sendMessage("§6Menu: " + getName() + " - Page: " + (chatSettings.getPageNum() + 1));
+        System.out.println("Before loop.");
         for (int i = (chatSettings.getPageNum()*itemsToList) + 1; i <= (chatSettings.getPageNum()+1)*itemsToList; i++)
         {
             if (getOption(i) != null)
@@ -119,14 +123,18 @@ public abstract class ChatMenu
                 player.sendMessage("§6" + getOption(i).getHotkey() + ": §f" + getOption(i).getName());
             }
         }
+        System.out.println("Before option 8.");
         if (getOption((chatSettings.getPageNum()+1)*itemsPerPage) != null)
         {
             player.sendMessage("§6" + getOption(8).getHotkey() + ": §f" + getOption(8).getName());
         }
+        System.out.println("Before option 9.");
         if (chatSettings.getPageNum() != 0)
         {
             player.sendMessage("§6" + getOption(9).getHotkey() + ": §f" + getOption(9).getName());
         }
+        System.out.println("Before option 0.");
         player.sendMessage("§6" + getOption(0).getHotkey() + ": §f" + getOption(0).getName());
+        System.out.println("After option 0.");
     }
 }

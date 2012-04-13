@@ -6,26 +6,23 @@ package com.github.sessional.efficiency.chatwindows;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
 import com.github.sessional.efficiency.chatwindows.options.BackLink;
-import com.github.sessional.efficiency.chatwindows.options.LinkedMenu;
 
 /**
  *
  * @author Andrew
  */
-public class BrowseMenu extends ChatMenu
+public class TalentDisplayMenu extends ChatMenu
 {
-    public BrowseMenu(EfficiencyPlugin plugin, ChatMenu parent)
+    public TalentDisplayMenu(EfficiencyPlugin plugin, ChatMenu parent)
     {
         super(plugin, parent);
-        setName("Browse Menu");
+        setName("Talent Display Menu");
     }
     
     public void init()
     {
-        setNumOptions(1);
-        LinkedMenu diggingMenu = new LinkedMenu(getPlugin(), "Digging Menu", 1, getPlugin().getChatMenu("DiggingDisplayMenu"));
+        setNumOptions(0);
         BackLink backLink = new BackLink(getPlugin(), "Back", 0);
-        addOption(1, diggingMenu);
         addOption(0, backLink);
     }
 }

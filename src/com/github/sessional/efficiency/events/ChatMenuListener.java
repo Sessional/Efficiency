@@ -66,7 +66,6 @@ public class ChatMenuListener implements Listener
             {
                 System.out.println("Executed Option!");
             }
-            
             event.setCancelled(true);
         }
     }

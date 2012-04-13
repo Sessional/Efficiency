@@ -5,6 +5,7 @@
 package com.github.sessional.efficiency.events;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -26,5 +27,14 @@ public class WoodcuttingListener implements Listener
     public void onBlockBreak(BlockBreakEvent event)
     {
         
+    }
+    
+    public boolean isTypeAxe(Material material)
+    {
+        if (material == Material.WOOD_AXE || material == Material.STONE_AXE
+                || material == Material.IRON_AXE || material == Material.GOLD_AXE
+                || material == Material.DIAMOND_AXE)
+            return true;
+        return false;
     }
 }
