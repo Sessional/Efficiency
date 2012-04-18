@@ -5,6 +5,7 @@
 package com.github.sessional.efficiency.events;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
+import com.github.sessional.efficiency.chatwindows.TalentDisplayMenu;
 import com.github.sessional.efficiency.chatwindows.options.BackLink;
 import com.github.sessional.efficiency.chatwindows.options.ExecutingLink;
 import com.github.sessional.efficiency.chatwindows.options.ExitLink;
@@ -13,6 +14,8 @@ import com.github.sessional.efficiency.chatwindows.options.LinkedMenu;
 import com.github.sessional.efficiency.chatwindows.options.Option;
 import com.github.sessional.efficiency.chatwindows.options.PreviousLink;
 import com.github.sessional.efficiency.settings.ChatSettings;
+import com.github.sessional.efficiency.settings.PlayerSettings;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,6 +44,7 @@ public class ChatMenuListener implements Listener
             player = event.getPlayer();
         }
         ChatSettings chatSettings = plugin.getPlayerSettings(player).getChatSettings();
+        PlayerSettings playerSettings = plugin.getPlayerSettings(player);
         if (chatSettings.isPlayerInWindow())
         {
             System.out.println("Chat command: " + event.getPlayer().getName());
@@ -64,7 +68,19 @@ public class ChatMenuListener implements Listener
                 chatSettings.goForwardPage();
             } else if (o instanceof ExecutingLink)
             {
-                System.out.println("Executed Option!");
+                if (chatSettings.getChatMenu() instanceof TalentDisplayMenu)
+                {
+                    TalentDisplayMenu tDM = (TalentDisplayMenu) chatSettings.getChatMenu();
+                    if (tDM.getLinkedTalent().canLearn(player))
+                    {
+                        playerSettings.learnTalent(tDM.getLinkedTalent());
+                        player.sendMessage("Learned talent " + ChatColor.GREEN + tDM.getLinkedTalent().getName() + ChatColor.WHITE + " rank " + ChatColor.GOLD + playerSettings.getDiggingSettings().getRankForTalent(tDM.getLinkedTalent()) + ChatColor.WHITE + ".");
+                    }
+                    else
+                    {
+                        player.sendMessage("You do not meet the requirements for that technique!");
+                    }
+                }
             }
             event.setCancelled(true);
         }

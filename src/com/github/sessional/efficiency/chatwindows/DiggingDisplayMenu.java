@@ -5,6 +5,8 @@
 package com.github.sessional.efficiency.chatwindows;
 
 import com.github.sessional.efficiency.EfficiencyPlugin;
+import com.github.sessional.efficiency.Tree.DiggingTree;
+import com.github.sessional.efficiency.Tree.DiggingTree.DiggingTechniques;
 import com.github.sessional.efficiency.chatwindows.options.BackLink;
 import com.github.sessional.efficiency.chatwindows.options.LinkedMenu;
 
@@ -23,10 +25,24 @@ public class DiggingDisplayMenu extends ChatMenu
     
     public void init()
     {
-        setNumOptions(1);
-        LinkedMenu digging1Menu = new LinkedMenu(getPlugin(), "Digging Talent 1", 1, getPlugin().getChatMenu("Digging1TalentMenu"));
+        setNumOptions(4);
+        LinkedMenu apprenticeDiggingMenu = new LinkedMenu(getPlugin(),
+                DiggingTree.getNameFromTechnique(DiggingTechniques.APPRENTICE_DIGGING),
+                1, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.APPRENTICE_DIGGING)));
+        LinkedMenu journeymanDiggingMenu = new LinkedMenu(getPlugin(),
+                DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING),
+                2, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING)));
+        LinkedMenu expertDiggingMenu = new LinkedMenu(getPlugin(),
+                DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING),
+                3, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING)));
+        LinkedMenu masterDiggingMenu = new LinkedMenu(getPlugin(),
+                DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING),
+                4, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING)));
         BackLink backLink = new BackLink(getPlugin(), "Back", 0);
         addOption(0, backLink);
-        addOption(1, digging1Menu);
+        addOption(1, apprenticeDiggingMenu);
+        addOption(2, journeymanDiggingMenu);
+        addOption(3, expertDiggingMenu);
+        addOption(4, masterDiggingMenu);
     }
 }

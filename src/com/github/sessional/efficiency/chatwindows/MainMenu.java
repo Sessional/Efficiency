@@ -24,9 +24,15 @@ public class MainMenu extends ChatMenu
     {
         setNumOptions(4);
         
-        LinkedMenu expertiseLink = new LinkedMenu(getPlugin(), "View Expertise", 1, getPlugin().getChatMenu("ExpertiseMenu"));
-        LinkedMenu browseLink = new LinkedMenu(getPlugin(), "Browse Techniques", 2, getPlugin().getChatMenu("BrowseMenu"));
-        LinkedMenu techniqueLink = new LinkedMenu(getPlugin(), "Learned Techniques", 3, getPlugin().getChatMenu("TechniqueMenu"));
+        LinkedMenu expertiseLink = new LinkedMenu(getPlugin(),
+                ChatMenu.getNameFromType(MenuTypes.EXPERTISE_MENU),
+                1, getPlugin().getChatMenu(ChatMenu.getNameFromType(MenuTypes.EXPERTISE_MENU)));
+        LinkedMenu browseLink = new LinkedMenu(getPlugin(),
+                ChatMenu.getNameFromType(MenuTypes.BROWSE_MENU),
+                2, getPlugin().getChatMenu(ChatMenu.getNameFromType(MenuTypes.BROWSE_MENU)));
+        LinkedMenu techniqueLink = new LinkedMenu(getPlugin(),
+                ChatMenu.getNameFromType(MenuTypes.TECHNIQUE_MENU),
+                3, getPlugin().getChatMenu(ChatMenu.getNameFromType(MenuTypes.TECHNIQUE_MENU)));
         ExitLink exitLink = new ExitLink(getPlugin(), "Exit", 0);
         addOption(1, expertiseLink);
         addOption(2, browseLink);

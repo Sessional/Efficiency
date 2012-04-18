@@ -23,7 +23,9 @@ public class BrowseMenu extends ChatMenu
     public void init()
     {
         setNumOptions(1);
-        LinkedMenu diggingMenu = new LinkedMenu(getPlugin(), "Digging Menu", 1, getPlugin().getChatMenu("DiggingDisplayMenu"));
+        LinkedMenu diggingMenu = new LinkedMenu(getPlugin(),
+                ChatMenu.getNameFromType(MenuTypes.DIGGING_DISPLAY_MENU), 1,
+                getPlugin().getChatMenu(ChatMenu.getNameFromType(MenuTypes.DIGGING_DISPLAY_MENU)));
         BackLink backLink = new BackLink(getPlugin(), "Back", 0);
         addOption(1, diggingMenu);
         addOption(0, backLink);

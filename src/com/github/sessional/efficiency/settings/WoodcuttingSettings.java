@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
  *
  * @author Andrew
  */
-public class WoodcuttingSettings
+public class WoodcuttingSettings extends ProfessionSettings
 {
     private Player player;
     

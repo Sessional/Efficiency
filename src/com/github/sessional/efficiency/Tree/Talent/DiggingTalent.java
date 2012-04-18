@@ -4,14 +4,16 @@
  */
 package com.github.sessional.efficiency.Tree.Talent;
 
+import com.github.sessional.efficiency.EfficiencyPlugin;
+
 /**
  *
  * @author Andrew
  */
 public class DiggingTalent extends Talent
 {
-    public DiggingTalent(String name, String description, int ranks)
+    public DiggingTalent(EfficiencyPlugin plugin, String name, String description, int ranks)
     {
-        super(name, description, ranks);
+        super(plugin, name, description, ranks);
     }
 }
