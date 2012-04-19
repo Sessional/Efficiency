@@ -62,19 +62,20 @@ public class PlayerSettings
         return diggingSettings;
     }
     
-    public void learnTalent(Talent talent)
+    public boolean learnTalent(Talent talent)
     {
         if (talent instanceof DiggingTalent)
         {
             if (getDiggingSettings().hasTalent(talent))
             {
-                getDiggingSettings().increaseRankForTalent(talent);
+                return getDiggingSettings().increaseRankForTalent(talent);
             }
             else
             {
-                getDiggingSettings().setRankForTalent(talent, 1);
+                return getDiggingSettings().setRankForTalent(talent, 1);
             }
         }
+        return false;
     }
     
     public ProfessionSettings getProfessionSettings(Talent talent)

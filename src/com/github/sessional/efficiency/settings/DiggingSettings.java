@@ -4,7 +4,6 @@
  */
 package com.github.sessional.efficiency.settings;
 
-import com.github.sessional.efficiency.Tree.Talent.DiggingTalent;
 import com.github.sessional.efficiency.Tree.Talent.Talent;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
@@ -36,10 +35,14 @@ public class DiggingSettings extends ProfessionSettings
         }
     }
     
-    public void setRankForTalent(Talent talent, int rank)
+    public boolean setRankForTalent(Talent talent, int rank)
     {
         if (rank <= talent.getRanks())
+        {
             talents.put(talent.getName(), rank);
+            return true;
+        }
+        return false;
     }
     
     public boolean hasTalent(Talent talent)
@@ -54,8 +57,8 @@ public class DiggingSettings extends ProfessionSettings
         return false;
     }
 
-    void increaseRankForTalent(Talent talent)
+    public boolean increaseRankForTalent(Talent talent)
     {
-        setRankForTalent(talent, getRankForTalent(talent) + 1);
+        return setRankForTalent(talent, getRankForTalent(talent) + 1);
     }
 }

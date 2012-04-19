@@ -62,7 +62,7 @@ public class EfficiencyPlugin extends JavaPlugin
         apprenticeDigging.setRankChance(0, 0);
         apprenticeDigging.setRankChance(1, 5);
         apprenticeDigging.setRequirement(null);
-        addTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.APPRENTICE_DIGGING), apprenticeDigging);
+        addTalent(apprenticeDigging.getName(), apprenticeDigging);
         
         DiggingTalent journeymanDigging = new DiggingTalent(this,
                 DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING),
@@ -71,7 +71,7 @@ public class EfficiencyPlugin extends JavaPlugin
         journeymanDigging.setRankChance(1, 10);
         journeymanDigging.setRequirement(apprenticeDigging);
         journeymanDigging.setRequiredLevel(5);
-        addTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING), journeymanDigging);
+        addTalent(journeymanDigging.getName(), journeymanDigging);
         
         DiggingTalent expertDigging = new DiggingTalent(this,
                 DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING),
@@ -80,7 +80,7 @@ public class EfficiencyPlugin extends JavaPlugin
         expertDigging.setRankChance(1, 15);
         expertDigging.setRequirement(journeymanDigging);
         expertDigging.setRequiredLevel(10);
-        addTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING), expertDigging);
+        addTalent(expertDigging.getName(), expertDigging);
         
         DiggingTalent masterDigging = new DiggingTalent(this,
                 DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING),
@@ -89,7 +89,20 @@ public class EfficiencyPlugin extends JavaPlugin
         masterDigging.setRankChance(1, 20);
         masterDigging.setRequirement(expertDigging);
         masterDigging.setRequiredLevel(15);
-        addTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING), masterDigging);
+        addTalent(masterDigging.getName(), masterDigging);
+        
+        DiggingTalent improvedFlint = new DiggingTalent(this,
+                DiggingTree.getNameFromTechnique(DiggingTechniques.IMPROVED_FLINT),
+                DiggingTree.getDescriptionFromTechnique(DiggingTechniques.IMPROVED_FLINT), 5);
+        improvedFlint.setRankChance(0, 0);
+        improvedFlint.setRankChance(1, 2);
+        improvedFlint.setRankChance(2, 4);
+        improvedFlint.setRankChance(3, 6);
+        improvedFlint.setRankChance(4, 8);
+        improvedFlint.setRankChance(5, 10);
+        improvedFlint.setRequiredLevel(5);
+        improvedFlint.setRequirement(journeymanDigging);
+        addTalent(improvedFlint.getName(), improvedFlint);
     }
     
     public Talent getTalent(DiggingTechniques technique)
@@ -126,6 +139,8 @@ public class EfficiencyPlugin extends JavaPlugin
                 getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING)));
         TalentDisplayMenu masterDiggingTalent = new TalentDisplayMenu(this, diggingTree,
                 getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING)));
+        TalentDisplayMenu improvedFlint = new TalentDisplayMenu(this, diggingTree,
+                getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.IMPROVED_FLINT)));
         addChatMenu(ChatMenu.getNameFromType(ChatMenu.MenuTypes.MAIN_MENU), mainMenu);
         addChatMenu(ChatMenu.getNameFromType(ChatMenu.MenuTypes.EXPERTISE_MENU), expertiseMenu);
         addChatMenu(ChatMenu.getNameFromType(ChatMenu.MenuTypes.BROWSE_MENU), browseMenu);
@@ -134,6 +149,7 @@ public class EfficiencyPlugin extends JavaPlugin
         addChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING), journeymanDiggingTalent);
         addChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING), expertDiggingTalent);
         addChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING), masterDiggingTalent);
+        addChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.IMPROVED_FLINT), improvedFlint);
         addChatMenu(ChatMenu.getNameFromType(ChatMenu.MenuTypes.DIGGING_DISPLAY_MENU), diggingTree);
         mainMenu.init();
         expertiseMenu.init();
@@ -144,6 +160,7 @@ public class EfficiencyPlugin extends JavaPlugin
         journeymanDiggingTalent.init();
         expertDiggingTalent.init();
         masterDiggingTalent.init();
+        improvedFlint.init();
     }
     
     public void addChatMenu(String name, ChatMenu chatMenu)

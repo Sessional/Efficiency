@@ -146,9 +146,25 @@ public abstract class ChatMenu
             TalentDisplayMenu tDM = (TalentDisplayMenu) this;
             player.sendMessage("§6Talent: §f" + tDM.getLinkedTalent().getName());
             player.sendMessage("§f" + tDM.getLinkedTalent().getDescription());
-            player.sendMessage("§6Rank: " + "§f" + playerSettings.getDiggingSettings().getRankForTalent(tDM.getLinkedTalent()) + "/" + tDM.getLinkedTalent().getRanks());
-            
             StringBuilder sb = new StringBuilder();
+            sb.append(ChatColor.GOLD);
+            sb.append("Requires level: ");
+            sb.append(ChatColor.WHITE);
+            sb.append(tDM.getLinkedTalent().getRequiredLevel());
+            if (tDM.getLinkedTalent().getRequirement() != null)
+            {
+                sb.append(ChatColor.GOLD);
+                sb.append(" - Requires talent: ");
+                sb.append(ChatColor.WHITE);
+                sb.append(tDM.getLinkedTalent().getRequirement().getName());
+            }
+            else
+            {
+                sb = new StringBuilder();
+                sb.append("No requirements.");
+            }
+            player.sendMessage(sb.toString());
+            sb = new StringBuilder();
             for (int i = 0; i < tDM.getLinkedTalent().getChances().length; i++)
             {
                 if (playerSettings.getDiggingSettings().getRankForTalent(tDM.getLinkedTalent()) == i)

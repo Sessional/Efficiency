@@ -47,8 +47,6 @@ public class ChatMenuListener implements Listener
         PlayerSettings playerSettings = plugin.getPlayerSettings(player);
         if (chatSettings.isPlayerInWindow())
         {
-            System.out.println("Chat command: " + event.getPlayer().getName());
-
             Option o = chatSettings.getChatMenu().getOption(Integer.parseInt(event.getMessage()));
             if (o instanceof BackLink)
             {
@@ -73,14 +71,17 @@ public class ChatMenuListener implements Listener
                     TalentDisplayMenu tDM = (TalentDisplayMenu) chatSettings.getChatMenu();
                     if (tDM.getLinkedTalent().canLearn(player))
                     {
-                        playerSettings.learnTalent(tDM.getLinkedTalent());
-                        player.sendMessage("Learned talent " + ChatColor.GREEN + tDM.getLinkedTalent().getName() + ChatColor.WHITE + " rank " + ChatColor.GOLD + playerSettings.getDiggingSettings().getRankForTalent(tDM.getLinkedTalent()) + ChatColor.WHITE + ".");
+                        if (playerSettings.learnTalent(tDM.getLinkedTalent()))
+                        {
+                            player.sendMessage("Learned talent " + ChatColor.GREEN + tDM.getLinkedTalent().getName() + ChatColor.WHITE + " rank " + ChatColor.GOLD + playerSettings.getDiggingSettings().getRankForTalent(tDM.getLinkedTalent()) + ChatColor.WHITE + ".");
+                        }
                     }
                     else
                     {
                         player.sendMessage("You do not meet the requirements for that technique!");
                     }
                 }
+                plugin.getPlayerSettings(player).getChatSettings().setChatMenu(null);
             }
             event.setCancelled(true);
         }
