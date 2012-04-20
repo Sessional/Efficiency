@@ -27,6 +27,7 @@ public class PlayerSetupListener implements Listener
     public void onPlayerLogin(PlayerJoinEvent event)
     {
         System.out.println("Player login: " + event.getPlayer().getName());
+        plugin.checkAndCreateDirectories(event.getPlayer());
         plugin.createPlayerSettings(event.getPlayer());
     }
     
@@ -34,6 +35,7 @@ public class PlayerSetupListener implements Listener
     public void onPlayerLogout(PlayerQuitEvent event)
     {
         System.out.println("Player logout: " + event.getPlayer().getName());
+        plugin.savePlayerSettings(event.getPlayer());
         plugin.deletePlayerSettings(event.getPlayer());
     }
 }

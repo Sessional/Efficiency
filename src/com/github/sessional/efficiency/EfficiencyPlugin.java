@@ -18,8 +18,17 @@ import com.github.sessional.efficiency.chatwindows.TalentDisplayMenu;
 import com.github.sessional.efficiency.events.ChatMenuListener;
 import com.github.sessional.efficiency.events.DiggingListener;
 import com.github.sessional.efficiency.events.PlayerSetupListener;
+import com.github.sessional.efficiency.settings.DiggingSettings;
 import com.github.sessional.efficiency.settings.PlayerSettings;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -196,6 +205,10 @@ public class EfficiencyPlugin extends JavaPlugin
         if (player == null)
             return false;
         
+        if (getPlayerSettings(player) == null)
+        {
+            createPlayerSettings(player);
+        }
         if (cmd.getName().equals("eff"))
         {
             getPlayerSettings(player).getChatSettings().setChatMenu(getChatMenu(ChatMenu.getNameFromType(ChatMenu.MenuTypes.MAIN_MENU)));
@@ -213,5 +226,64 @@ public class EfficiencyPlugin extends JavaPlugin
     {
         if (playerSettings.containsKey(player.getName()))
             playerSettings.remove(player.getName());
+    }
+    
+    public void savePlayerSettings(Player player)
+    {
+        saveDirectories(player);
+    }
+    
+    public void checkAndCreateDirectories(Player player)
+    {
+        File dataFolder = getDataFolder();
+        String fileSep = File.separator;
+        File playerDirectory = new File(dataFolder + fileSep  + player.getName());
+        if (!playerDirectory.exists())
+        {
+            playerDirectory.mkdirs();
+        }
+        File digFile = new File(playerDirectory, "Dig.txt");
+        if (!digFile.exists())
+        {
+            try
+            {
+                digFile.createNewFile();
+            } catch (IOException ex)
+            {
+                System.out.println("Can not create a dig file!");
+                return;
+            }
+        }
+    }
+    
+    public void saveDirectories(Player player)
+    {
+        File dataFolder = getDataFolder();
+        String fileSep = File.separator;
+        File playerDirectory = new File(dataFolder + fileSep + player.getName());
+        if (!playerDirectory.exists())
+        {
+            return;
+        }
+        DiggingSettings digSettings = getPlayerSettings(player).getDiggingSettings();
+        String digString = digSettings.getTalentString();
+        int expLevel = digSettings.getExpertiseLevel();
+        File digFile = new File(playerDirectory, "Dig.txt");
+        if (!digFile.exists())
+        {
+            return;
+        }
+        try
+        {
+            FileWriter fw = new FileWriter(digFile);
+            BufferedWriter buff = new BufferedWriter(fw);
+            fw.write(expLevel + "\n");
+            buff.write(digString);
+            buff.close();
+            fw.close();
+        } catch (Exception ex)
+        {
+            System.out.println("Corrupted Player Directory: " + player.getName());
+        }
     }
 }

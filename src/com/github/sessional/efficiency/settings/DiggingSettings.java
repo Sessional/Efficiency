@@ -6,6 +6,8 @@ package com.github.sessional.efficiency.settings;
 
 import com.github.sessional.efficiency.Tree.Talent.Talent;
 import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 import org.bukkit.entity.Player;
 
 /**
@@ -55,6 +57,21 @@ public class DiggingSettings extends ProfessionSettings
             }
         }
         return false;
+    }
+    
+    public String getTalentString()
+    {
+        StringBuilder sb = new StringBuilder();
+        
+        for (Entry s : talents.entrySet())
+        {
+            sb.append(s.getKey());
+            sb.append(":");
+            sb.append(s.getValue());
+            sb.append("\n");
+        }
+        
+        return sb.toString();
     }
 
     public boolean increaseRankForTalent(Talent talent)
