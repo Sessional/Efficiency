@@ -20,10 +20,12 @@ import com.github.sessional.efficiency.events.DiggingListener;
 import com.github.sessional.efficiency.events.PlayerSetupListener;
 import com.github.sessional.efficiency.settings.DiggingSettings;
 import com.github.sessional.efficiency.settings.PlayerSettings;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -284,6 +286,58 @@ public class EfficiencyPlugin extends JavaPlugin
         } catch (Exception ex)
         {
             System.out.println("Corrupted Player Directory: " + player.getName());
+        }
+    }
+    
+    public void loadFiles(Player player)
+    {
+        File dataFolder = getDataFolder();
+        String fileSep = File.separator;
+        File playerDirectory = new File(dataFolder + fileSep + player.getName());
+        
+        if (!playerDirectory.exists())
+        {
+            checkAndCreateDirectories(player);
+            return;
+        }
+        
+        File diggingFile = new File(playerDirectory, "Dig.txt");
+        if (diggingFile.exists())
+        {
+            FileReader fr = null;
+            try
+            {
+                fr = new FileReader(diggingFile);
+                BufferedReader buff = new BufferedReader(fr);
+                String expLevel = buff.readLine();
+                if (expLevel == null)
+                {
+                    return;
+                }
+                int exLevel = Integer.parseInt(expLevel);
+                if (this.getPlayerSettings(player) == null)
+                {
+                    this.createPlayerSettings(player);
+                    this.getPlayerSettings(player).getDiggingSettings().setExpertiseLevel(exLevel);
+                } else
+                {
+                    this.getPlayerSettings(player).getDiggingSettings().setExpertiseLevel(exLevel);
+                }
+                String currentLine = buff.readLine();
+                while (currentLine != "\n" && currentLine != null && currentLine != "null")
+                {
+                    String talentLine = currentLine;
+                    String[] talent = talentLine.split(":");
+                    String talentName = talent[0];
+                    int talentLevel = Integer.parseInt(talent[1]);
+                    getPlayerSettings(player).getDiggingSettings().setRankForTalent(talentName, talentLevel);
+                    currentLine = buff.readLine();
+                }
+                
+            } catch (Exception ex)
+            {
+                Logger.getLogger(EfficiencyPlugin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

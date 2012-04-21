@@ -27,8 +27,8 @@ public class PlayerSettings
         this.player = player;
         this.plugin = plugin;
         chatSettings = new ChatSettings(plugin, player);
-        woodcuttingSettings = new WoodcuttingSettings(player);
-        diggingSettings = new DiggingSettings(player);
+        woodcuttingSettings = new WoodcuttingSettings(plugin, player);
+        diggingSettings = new DiggingSettings(plugin, player);
         freeLevels = 0;
     }
     

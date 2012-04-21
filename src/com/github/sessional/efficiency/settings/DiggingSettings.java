@@ -4,6 +4,7 @@
  */
 package com.github.sessional.efficiency.settings;
 
+import com.github.sessional.efficiency.EfficiencyPlugin;
 import com.github.sessional.efficiency.Tree.Talent.Talent;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -19,8 +20,9 @@ public class DiggingSettings extends ProfessionSettings
     private Player player;
     private HashMap<String, Integer> talents;
     
-    public DiggingSettings(Player player)
+    public DiggingSettings(EfficiencyPlugin plugin, Player player)
     {
+        super(plugin);
         this.player = player;
         talents = new HashMap<String, Integer>();
     }
@@ -35,6 +37,16 @@ public class DiggingSettings extends ProfessionSettings
         {
             return 0;
         }
+    }
+    
+    public boolean setRankForTalent(String talentName, int rank)
+    {
+        if (rank <= getPlugin().getTalent(talentName).getRanks())
+        {
+            talents.put(talentName, rank);
+            return true;
+        }
+        return false;
     }
     
     public boolean setRankForTalent(Talent talent, int rank)

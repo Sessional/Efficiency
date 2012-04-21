@@ -25,7 +25,7 @@ public class DiggingDisplayMenu extends ChatMenu
     
     public void init()
     {
-        setNumOptions(4);
+        setNumOptions(5);
         LinkedMenu apprenticeDiggingMenu = new LinkedMenu(getPlugin(),
                 DiggingTree.getNameFromTechnique(DiggingTechniques.APPRENTICE_DIGGING),
                 1, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.APPRENTICE_DIGGING)));
@@ -38,11 +38,15 @@ public class DiggingDisplayMenu extends ChatMenu
         LinkedMenu masterDiggingMenu = new LinkedMenu(getPlugin(),
                 DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING),
                 4, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING)));
+        LinkedMenu improvedFlintMenu = new LinkedMenu(getPlugin(),
+                DiggingTree.getNameFromTechnique(DiggingTechniques.IMPROVED_FLINT),
+                5, getPlugin().getChatMenu(DiggingTree.getNameFromTechnique(DiggingTechniques.IMPROVED_FLINT)));
         BackLink backLink = new BackLink(getPlugin(), "Back", 0);
         addOption(0, backLink);
         addOption(1, apprenticeDiggingMenu);
         addOption(2, journeymanDiggingMenu);
         addOption(3, expertDiggingMenu);
         addOption(4, masterDiggingMenu);
+        addOption(5, improvedFlintMenu);
     }
 }

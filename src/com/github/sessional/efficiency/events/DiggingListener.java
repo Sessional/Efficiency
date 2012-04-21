@@ -52,7 +52,7 @@ public class DiggingListener implements Listener
                 if (activates(p, plugin.getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.MASTER_DIGGING))))
                 {
                     stopDurability(p);
-                    p.sendMessage("Apprentice digging has prevented durability damage to your spade!");
+                    p.sendMessage("Master digging has prevented durability damage to your spade!");
                     plugin.getPlayerSettings(p).getDiggingSettings().incrementExpertiseLevel();
                     p.sendMessage("Your expertise level in digging is now: " + plugin.getPlayerSettings(p).getDiggingSettings().getExpertiseLevel());
                 }
@@ -61,7 +61,7 @@ public class DiggingListener implements Listener
                 if (activates(p, plugin.getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.EXPERT_DIGGING))))
                 {
                     stopDurability(p);
-                    p.sendMessage("Apprentice digging has prevented durability damage to your spade!");
+                    p.sendMessage("Expert digging has prevented durability damage to your spade!");
                     plugin.getPlayerSettings(p).getDiggingSettings().incrementExpertiseLevel();
                     p.sendMessage("Your expertise level in digging is now: " + plugin.getPlayerSettings(p).getDiggingSettings().getExpertiseLevel());
                 }
@@ -70,7 +70,7 @@ public class DiggingListener implements Listener
                 if (activates(p, plugin.getTalent(DiggingTree.getNameFromTechnique(DiggingTechniques.JOURNEYMAN_DIGGING))))
                 {
                     stopDurability(p);
-                    p.sendMessage("Apprentice digging has prevented durability damage to your spade!");
+                    p.sendMessage("Journeyman digging has prevented durability damage to your spade!");
                     plugin.getPlayerSettings(p).getDiggingSettings().incrementExpertiseLevel();
                     p.sendMessage("Your expertise level in digging is now: " + plugin.getPlayerSettings(p).getDiggingSettings().getExpertiseLevel());
                 }

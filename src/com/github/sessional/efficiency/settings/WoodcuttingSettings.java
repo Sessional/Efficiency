@@ -4,6 +4,7 @@
  */
 package com.github.sessional.efficiency.settings;
 
+import com.github.sessional.efficiency.EfficiencyPlugin;
 import org.bukkit.entity.Player;
 
 /**
@@ -14,8 +15,9 @@ public class WoodcuttingSettings extends ProfessionSettings
 {
     private Player player;
     
-    public WoodcuttingSettings(Player player)
+    public WoodcuttingSettings(EfficiencyPlugin plugin, Player player)
     {
+        super(plugin);
         this.player = player;
     }
 }

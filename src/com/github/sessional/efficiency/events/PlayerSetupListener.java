@@ -29,6 +29,7 @@ public class PlayerSetupListener implements Listener
         System.out.println("Player login: " + event.getPlayer().getName());
         plugin.checkAndCreateDirectories(event.getPlayer());
         plugin.createPlayerSettings(event.getPlayer());
+        plugin.loadFiles(event.getPlayer());
     }
     
     @EventHandler
